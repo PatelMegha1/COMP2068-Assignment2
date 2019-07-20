@@ -3,6 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+mongoose.connect(`mongodb+srv://example:example123@cluster0-uzvws.mongodb.net/test?retryWrites=true&w=majority`,{
+  useNewUrlParser: true
+}
+);
+
+var db = mongoose.connection;
+db.on('error', err => console.error(err));
+db.once('open',() => console.log('Connection to mongoose successful'));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
